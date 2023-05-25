@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do list</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #27374D;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 70vh;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .content {
+            position: absolute;
+            left: 38%;
+            top: 10%;
+            padding: 30px;
+            height: auto;
+            background-color: #9DB2BF;
+            border: none;
+            border-radius: 12px ;
+            color: #374259;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: bolder;
+        }
+
+        .todolist input {
+            padding: 12px;
+            border-radius: 20px;
+            border-bottom-right-radius: 100px;
+            border: none;
+        }
+
+        .todolist button {
+            padding: 12px;
+            border-radius: 20px;
+            border-bottom-left-radius: 100px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .todolist button.clicked {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+
+
+        #tasks {
+            border-radius: 10px;
+            width: 100%;
+            position: relative;
+            right: 20px;
+            background-color: #9DB2BF;
+            padding: 30px 20px;
+            margin-top: 10px;
+        }
+        
+        .task {
+            border-radius: 5px;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid #939697;
+            cursor: pointer;
+            background-color: #c5e1e6;
+            height: 50px;
+            margin-bottom: 8px;
+            padding: 5px 10px;
+            display: flex;
+        }
+
+        .task span {
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+        }
+
+        .task button {
+            background-color: #e56565;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            border-radius: 5px;
+            font-size: 10px;
+        }
+        @media only screen and (max-width: 600px) {
+        .content{
+            width: 60%;
+            left: 13%;
+            top: 10%;
+        }
+        }
+
+        @media only screen and (max-width: 960px) {
+            .content{
+                width: 60%;
+                left: 13%;
+                top: 10%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <h2>To-Do List</h2>
+            <div class="todolist">
+                <input type="text" id="inputNote" placeholder="Masukkan catatan...">
+                <button id="push">Add</button>
+            </div>
+            <div id="tasks"></div>
+        </div>
+    </div>
+
+    <script>
+        const addButton = document.getElementById("push");
+
+        document.querySelector('#push').onclick = function() {
+            if (document.querySelector('#inputNote').value.length == 0) {
+                alert("Kindly Enter Task Name!!!!")
+            } else {
+                document.querySelector('#tasks').innerHTML += `
+                    <div class="task">
+                        <span id="taskname">
+                            ${document.querySelector('#inputNote').value}
+                        </span>
+                        <button class="delete">
+                            <p>delete</p>
+                        </button>
+                    </div>
+                `;
+
+                var current_tasks = document.querySelectorAll(".delete");
+                for (var i = 0; i < current_tasks.length; i++) {
+                    current_tasks[i].onclick = function() {
+                        this.parentNode.remove();
+                    }
+                }
+            }
+        }
+
+        addButton.addEventListener("click", function() {
+            addButton.classList.add("clicked");
+            setTimeout(function() {
+                addButton.classList.remove("clicked");
+            }, 300);
+        });
+
+    </script>
+</body>
+</html>
